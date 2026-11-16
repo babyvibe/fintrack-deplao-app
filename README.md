@@ -11,13 +11,6 @@
 <p align="center"><a href="README.en.md">English</a> · <b>Tiếng Việt</b></p>
 
 <p align="center">
-  <a href="https://github.com/babyvibe/fintrack-deplao-app/actions/workflows/ci.yml"><img src="https://github.com/babyvibe/fintrack-deplao-app/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
-  <a href="https://github.com/babyvibe/fintrack-deplao-app/releases"><img src="https://img.shields.io/github/v/release/babyvibe/fintrack-deplao-app?label=phi%C3%AAn%20b%E1%BA%A3n" alt="Phiên bản"></a>
-  <img src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fbabyvibe%2Ffintrack-deplao-app%2Fmain%2Fdeplao-plugin.json&query=%24.minDeplaoVersion&prefix=%E2%89%A5%20&label=Deplao&color=0e9f6e" alt="Bản Deplao tối thiểu (minDeplaoVersion trong deplao-plugin.json)">
-  <a href="LICENSE"><img src="https://img.shields.io/badge/gi%E1%BA%A5y%20ph%C3%A9p-MIT-blue" alt="Giấy phép MIT"></a>
-</p>
-
-<p align="center">
   <img src="docs/images/app-overview.jpg" height="420" alt="FinTrack trong Deplao: tổng quan tài chính">
   <img src="docs/images/zalo-group.jpg" height="420" alt="Nhóm Zalo trong Deplao: thành viên nhắn chi tiêu, gửi ghi âm, ảnh hoá đơn, FinTrack trả lời bản nháp / đã ghi">
   <img src="docs/images/app-assistant.jpg" height="420" alt="Trợ lý AI của FinTrack tạo bản nháp từ một câu">
