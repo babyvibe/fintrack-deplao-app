@@ -1,0 +1,28 @@
+name: Feature request
+description: An idea for the FinTrack app in Deplao
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem are you running into?
+      description: Describe the need / the real situation; no need to propose a solution yet.
+    validations:
+      required: true
+  - type: textarea
+    id: idea
+    attributes:
+      label: How would you like it to work?
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives you have considered (optional)
+  - type: checkboxes
+    id: scope
+    attributes:
+      label: Scope
+      options:
+        - label: Belongs to FinTrack itself (UI / income and spending logic), may need a change in the FinTrack repo
+        - label: Belongs to the Deplao integration (Zalo groups, workflow, accounts in Deplao, deployment)

@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FinTrack</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- SDK provided by Deplao (not bundled) -->
+  <script src="/__deplao/sdk.js"></script>
+  <script src="lib.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <!-- Entry page: if ready, go straight to the FinTrack UI (vendor/fintrack/app); otherwise show setup. -->
+  <div id="launch" class="launch">
+    <div class="launch__icon" aria-hidden="true">💸</div>
+    <div class="launch__text" role="status">Đang mở FinTrack…</div>
+  </div>
+
+  <main class="page" id="page" hidden>
+    <header class="hero">
+      <div class="hero__icon" aria-hidden="true">💸</div>
+      <div class="hero__text">
+        <h1 class="hero__title" id="page-title">FinTrack</h1>
+        <p class="hero__sub">FinTrack đầy đủ trong Deplao, chạy trên Cloudflare của bạn. Triển khai một lần rồi dùng; ghi chi tiêu từ tin Zalo bằng node FinTrack trong Workflow.</p>
+      </div>
+      <div class="hero__side">
+        <button id="open-app" class="btn btn--primary" type="button" disabled>Mở FinTrack</button>
+        <button id="refresh" class="btn btn--ghost btn--sm" type="button" title="Kiểm tra lại">Kiểm tra lại</button>
+      </div>
+    </header>
+
+    <div id="notice" aria-live="polite"></div>
+
+    <section class="card step" id="sec-share" hidden>
+      <header class="step__head">
+        <span class="step__num" aria-hidden="true">🔗</span>
+        <div class="step__titles">
+          <h2 class="step__title">Chia sẻ FinTrack</h2>
+          <p class="step__sub">Gửi địa chỉ này để người khác dùng FinTrack trên trình duyệt hoặc điện thoại.</p>
+        </div>
+        <span class="step__badge"></span>
+      </header>
+      <div class="step__body"></div>
+    </section>
+
+    <section class="card step" id="sec-cloud">
+      <header class="step__head">
+        <span class="step__num" aria-hidden="true">☁</span>
+        <div class="step__titles">
+          <h2 class="step__title">FinTrack trên Cloudflare</h2>
+          <p class="step__sub">Worker + D1 + Workers AI trên tài khoản Cloudflare đã kết nối trong Deplao.</p>
+        </div>
+        <span class="step__badge"></span>
+      </header>
+      <div class="step__body"></div>
+    </section>
+
+    <section class="card step" id="sec-workspace" hidden>
+      <header class="step__head">
+        <span class="step__num" aria-hidden="true">👥</span>
+        <div class="step__titles">
+          <h2 class="step__title">Tài khoản FinTrack</h2>
+          <p class="step__sub">Mỗi tài khoản có một sổ riêng. Đăng nhập, tạo tài khoản mới, chuyển nhanh giữa các tài khoản đã ghi nhớ.</p>
+        </div>
+        <span class="step__badge"></span>
+      </header>
+      <div class="step__body"></div>
+    </section>
+
+
+    <footer class="foot">
+      <span id="foot-version"></span>
+      <span>Mã nguồn mở MIT ·</span>
+      <a href="#" id="foot-link">github.com/babyvibe/fintrack-deplao-app</a>
+    </footer>
+  </main>
+</body>
+</html>

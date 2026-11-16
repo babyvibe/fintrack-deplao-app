@@ -1,0 +1,38 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Test (${{ matrix.os }}, Node ${{ matrix.node }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest]
+        node: [20, 22, 24]
+        include:
+          # Deplao runs mostly on Windows: check paths, line endings and packing on Windows too.
+          - os: windows-latest
+            node: 22
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      # No dependencies: no npm install needed.
+      - name: Unit tests
+        run: node --test
+      - name: Validate manifest + JSON
+        run: node scripts/validate-manifest.mjs
+      - name: Pack (without the FinTrack bundle)
+        run: node scripts/pack.mjs --no-bundle --out dist/ci-check.zip
+      - name: Zip opens with unzip
+        if: runner.os == 'Linux'
+        run: unzip -t dist/ci-check.zip

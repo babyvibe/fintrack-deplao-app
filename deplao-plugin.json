@@ -1,0 +1,134 @@
+{
+  "id": "io.github.babyvibe.fintrack",
+  "name": "FinTrack",
+  "version": "0.1.1",
+  "apiVersion": 1,
+  "minDeplaoVersion": "26.11.0",
+  "description": "FinTrack đầy đủ ngay trong Deplao: thu chi, ngân sách, đầu tư, tiết kiệm, báo cáo, trợ lý AI. Chạy trên Cloudflare của chính bạn, triển khai một lần rồi dùng; trợ lý AI của FinTrack (OpenAI / Gemini / DeepSeek) hoặc của Deplao; nhiều tài khoản, chuyển nhanh. Node Workflow ghi chi tiêu từ tin Zalo (chữ, ghi âm, ảnh).",
+  "author": "babyvibe",
+  "homepage": "https://github.com/babyvibe/fintrack-deplao-app",
+  "icon": "icon.svg",
+  "runtime": "local",
+  "permissions": [
+    "storage",
+    "ui:pages",
+    "ui:microphone",
+    "workflow:nodes",
+    "network",
+    "cloudflare:workers",
+    "accounts:read",
+    "chat:read",
+    "chat:send",
+    "media:read",
+    "ai:use"
+  ],
+  "ui": { "entry": "ui/index.html" },
+  "backend": { "entry": "backend/index.js" },
+  "contributes": {
+    "pages": [{ "id": "home", "title": "FinTrack", "icon": "💸", "path": "/" }],
+    "settings": {
+      "schema": {
+        "properties": {
+          "fintrackUrl": {
+            "type": "string",
+            "title": "Địa chỉ FinTrack (tuỳ chọn)",
+            "description": "Để trống: ứng dụng tự dùng tên miền riêng (gắn ở trang Tuỳ chọn → FinTrack trên Cloudflare → Tên miền riêng) hoặc địa chỉ workers.dev. Chỉ điền khi bạn tự triển khai FinTrack ở nơi khác, vd https://fintrack.example.com. Ô này không tạo tên miền.",
+            "maxLength": 200
+          },
+          "integrationSecret": {
+            "type": "string",
+            "title": "Secret tích hợp (tuỳ chọn)",
+            "description": "Chỉ cần khi bạn tự triển khai FinTrack (wrangler secret put DEPLAO_INTEGRATION_SECRET). Để trống = ứng dụng tự tạo khi triển khai.",
+            "maxLength": 200,
+            "x-secret": true
+          }
+        }
+      }
+    },
+    "workflowNodes": [
+      {
+        "type": "fintrack.record",
+        "label": "FinTrack: ghi chi tiêu từ tin nhắn",
+        "group": "FinTrack",
+        "icon": "💸",
+        "description": "Tin chữ, ghi âm hoặc ảnh (hoá đơn, chuyển khoản) của mọi thành viên đi qua trợ lý AI của FinTrack (một hội thoại riêng cho mỗi nhóm): tạo bản nháp chờ xác nhận, hoặc tự ghi khoản chắc chắn; trả lời ngắn trong nhóm. Người gửi trả lời “ok” để ghi, “huỷ” để bỏ hoặc huỷ khoản vừa ghi.",
+        "configSchema": {
+          "properties": {
+            "account": {
+              "type": "string",
+              "title": "Tài khoản Zalo trả lời",
+              "description": "Để trống = tài khoản của workflow / tài khoản nhận tin.",
+              "x-widget": "account"
+            },
+            "mode": {
+              "type": "string",
+              "title": "Chế độ ghi (draft | auto)",
+              "description": "draft = bản nháp chờ xác nhận (mặc định): người gửi trả lời “ok” trong nhóm, hoặc xác nhận trong FinTrack (Tổng quan → Chờ xác nhận); auto = tự ghi thu / chi / chuyển khoản có số tiền trong tin (với ảnh: trong chú thích ảnh) và đủ ví, sai thì trả lời “huỷ”; còn lại chờ xác nhận. Khoản ghi vào tài khoản FinTrack đang mở trong Deplao.",
+              "enum": ["draft", "auto"],
+              "default": "draft"
+            },
+            "replyInGroup": {
+              "type": "boolean",
+              "title": "Trả lời trong nhóm",
+              "default": true
+            },
+            "quoteReply": {
+              "type": "boolean",
+              "title": "Trích dẫn tin gốc khi trả lời",
+              "default": true
+            },
+            "voice": {
+              "type": "boolean",
+              "title": "Nhận tin ghi âm",
+              "description": "Chuyển ghi âm thành chữ bằng Workers AI trên Cloudflare của bạn.",
+              "default": true
+            },
+            "images": {
+              "type": "boolean",
+              "title": "Nhận tin ảnh",
+              "description": "Ảnh hoá đơn / chuyển khoản (JPG, PNG, WebP, tối đa ~4 MB) → trợ lý đọc ảnh. Cần trợ lý của FinTrack (OpenAI, Gemini hoặc DeepSeek Flash); trợ lý của Deplao chưa đọc được ảnh.",
+              "default": true
+            },
+            "assistantId": {
+              "type": "string",
+              "title": "Trợ lý AI cho node này (tuỳ chọn)",
+              "description": "Mặc định = trợ lý đã chọn cho sổ nhận tin (FinTrack → Cài đặt → Trợ lý AI: trợ lý của FinTrack hoặc của Deplao). Chọn một trợ lý của Deplao ở đây thì node luôn dùng trợ lý đó (không đọc được ảnh).",
+              "x-widget": "assistant",
+              "default": ""
+            }
+          }
+        },
+        "outputs": [
+          { "name": "recorded", "label": "Số khoản đã ghi" },
+          { "name": "drafts", "label": "Số khoản chờ xác nhận" },
+          { "name": "items", "label": "Các khoản" },
+          { "name": "text", "label": "Nội dung đã phân tích" },
+          { "name": "reply", "label": "Tin đã trả lời" },
+          { "name": "skipped", "label": "Lý do bỏ qua" }
+        ]
+      },
+      {
+        "type": "fintrack.transcribe",
+        "label": "FinTrack: ghi âm thành chữ",
+        "group": "FinTrack",
+        "icon": "🎙️",
+        "description": "Chuyển tin ghi âm của trigger thành chữ bằng Workers AI (Whisper) trên Cloudflare của bạn, để workflow xử lý tiếp.",
+        "configSchema": {
+          "properties": {
+            "account": {
+              "type": "string",
+              "title": "Tài khoản Zalo",
+              "description": "Để trống = tài khoản nhận tin.",
+              "x-widget": "account"
+            }
+          }
+        },
+        "outputs": [
+          { "name": "text", "label": "Chữ" },
+          { "name": "durationSec", "label": "Thời lượng (giây)" },
+          { "name": "skipped", "label": "Lý do bỏ qua" }
+        ]
+      }
+    ]
+  }
+}

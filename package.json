@@ -1,0 +1,37 @@
+{
+  "name": "fintrack-deplao-app",
+  "version": "0.1.1",
+  "private": true,
+  "description": "Ứng dụng Deplao: FinTrack đầy đủ trong Deplao — chạy trên Cloudflare của bạn, trợ lý AI của FinTrack hoặc của Deplao, nhiều tài khoản; tuỳ chọn ghi chi tiêu từ nhóm Zalo (chữ, ghi âm, ảnh).",
+  "keywords": [
+    "deplao",
+    "deplao-plugin",
+    "fintrack",
+    "personal-finance",
+    "cloudflare-workers",
+    "zalo"
+  ],
+  "license": "MIT",
+  "author": "babyvibe",
+  "homepage": "https://github.com/babyvibe/fintrack-deplao-app#readme",
+  "bugs": {
+    "url": "https://github.com/babyvibe/fintrack-deplao-app/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/babyvibe/fintrack-deplao-app.git"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "node --test",
+    "validate": "node scripts/validate-manifest.mjs",
+    "check": "node --test && node scripts/validate-manifest.mjs",
+    "vendor": "node scripts/vendor-fintrack.mjs",
+    "pack": "node scripts/pack.mjs",
+    "e2e": "node scripts/with-fintrack.mjs scripts/e2e-fintrack.mjs",
+    "preview": "node scripts/with-fintrack.mjs scripts/dev-preview.mjs",
+    "shots": "node scripts/readme-shots.mjs"
+  }
+}

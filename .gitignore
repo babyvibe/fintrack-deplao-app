@@ -1,0 +1,27 @@
+# Dependencies / build output
+node_modules/
+dist/
+*.zip
+coverage/
+
+# Prebuilt FinTrack bundle: created by `npm run vendor`, not committed (only the README is kept)
+vendor/fintrack/*
+!vendor/fintrack/README.md
+vendor/fintrack.vendor.json
+
+# Environment / secrets
+.env
+.env.*
+.dev.vars
+
+# Miniflare / wrangler caches (scripts/e2e-fintrack.mjs, scripts/dev-preview.mjs)
+.wrangler/
+.mf/
+
+# OS and IDE files
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
+*.log

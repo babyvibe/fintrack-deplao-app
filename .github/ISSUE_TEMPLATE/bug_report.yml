@@ -1,0 +1,53 @@
+name: Bug report
+description: The FinTrack app in Deplao misbehaves or shows an error
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting! For a **security vulnerability**, do not open an issue: use Security → Report a vulnerability (see SECURITY.md).
+        Do not paste secrets, tokens, email addresses, phone numbers or private message content here.
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      description: What you did, what you expected and what you saw (with the error message, if any).
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Open FinTrack → Options page ("Tuỳ chọn")
+        2. Click …
+        3. See …
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Which area?
+      options:
+        - Cloudflare deploy / update / custom domain
+        - Accounts (sign in / create / switch / sign out)
+        - AI assistant
+        - Zalo groups and workflow (text / voice / image)
+        - FinTrack UI inside Deplao
+        - Other
+    validations:
+      required: true
+  - type: input
+    id: versions
+    attributes:
+      label: Versions
+      description: FinTrack app (bottom of the Options page), Deplao, operating system.
+      placeholder: FinTrack for Deplao 0.1.0 · Deplao 26.10.4 · Windows 11
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Log (optional)
+      description: Lines starting with `[fintrack]` from the app's log in Deplao, with private details removed.
+      render: text
