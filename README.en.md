@@ -11,12 +11,6 @@
 
 <p align="center"><b>English</b> · <a href="README.md">Tiếng Việt</a></p>
 
-<p align="center">
-  <a href="https://github.com/babyvibe/fintrack-deplao-app/actions/workflows/ci.yml"><img src="https://github.com/babyvibe/fintrack-deplao-app/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
-  <a href="https://github.com/babyvibe/fintrack-deplao-app/releases"><img src="https://img.shields.io/github/v/release/babyvibe/fintrack-deplao-app?label=release" alt="Release"></a>
-  <img src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fbabyvibe%2Ffintrack-deplao-app%2Fmain%2Fdeplao-plugin.json&query=%24.minDeplaoVersion&prefix=%E2%89%A5%20&label=Deplao&color=0e9f6e" alt="Minimum Deplao version (minDeplaoVersion in deplao-plugin.json)">
-  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue" alt="MIT license"></a>
-</p>
 
 <p align="center">
   <img src="docs/images/app-overview.jpg" height="420" alt="FinTrack inside Deplao: monthly overview">
